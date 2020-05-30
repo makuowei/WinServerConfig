@@ -1,0 +1,29 @@
+# Enable Docker Repo. By default, only AppStream, Base and Extras in standard CentOS installation
+sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+# Verify "docker-ce-stable" is added (repo id)
+sudo dnf repolist -v
+
+# List docker verison
+sudo dnf list docker-ce --showduplicates | sort -r
+
+# Install docker-ce (Commercial Edition)
+# - Since containerd.io is install included in the latest version, --nobest select the next possible version to install
+# - If podman is installed, it conflict with podman-manpages. Simply remove it before installation
+sudo dnf remove podman-manpages
+sudo dnf install docker-ce --nobest -y
+
+
+# Disable Firewall to allow DNS from inside
+sudo systemctl disable firewalld
+
+# Enable docker daemon
+sudo systemctl enable --now docker
+systemctl is-active docker
+
+################## docker-compose ########################
+# For global installation, download docker-compose from github
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
+sudo mv docker-compose /usr/local/bin && sudo chmod +x /usr/local/bin/docker-compose
+
+
