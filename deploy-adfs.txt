@@ -1,0 +1,13 @@
+# Deploy ADFS
+Install-WindowsFeature ADFS-Federation
+
+$password = Read-Host -AsSecureString
+certutil -f -p $password -importPFX C:\install\certificate.pfx
+dir cert:\LocalMachine\My
+
+$ADFSCred = Get-Credential "domain\sa-adfs"
+Install-AdfsFarm -CertificateThumbprint "0000000011111122222233333344444444555555" -FederationServiceDisplayName "ADFS Company Name" –FederationServiceName "adfs.domain.ch" -ServiceAccountCredential $ADFSCred -SQLConnectionString "Data Source=SQL;Integrated Security=True"
+
+#Add server to ADFS Farm
+$ADFSCred = Get-Credential "domain\sa-adfs"
+Add-AdfsFarmNode -ServiceAccountCredential $ADFSCred -PrimaryComputerName ADFSSERVER1 -CertificateThumbprint "0000000011111122222233333344444444555555" -SQLConnectionString "Data Source=SQL;Integrated Security=True"
