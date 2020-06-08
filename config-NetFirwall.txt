@@ -1,0 +1,28 @@
+# Config Windows Firewall
+
+# Get Firewall Profiles
+Get-NetFirewallProfile
+
+# Disable Firewall on all profiles
+#Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled false
+
+# Instead of disabling firewall totally, Create Firewall Rules(SQL ports as example)
+New-NetFirewallRule -DisplayName SQLService `
+  -Profile    Domain `
+  -Direction  Inbound `
+  -Action     Allow `
+  -Protocol   TCP `
+  -LocalPort  1433 `
+  -RemoteAddress LocalSubnet
+
+
+New-NetFirewallRule -DisplayName SQLBroker `
+  -Profile    Domain `
+  -Direction  Inbound `
+  -Action     Allow `
+  -Protocol   TCP `
+  -LocalPort  4022 `
+  -RemoteAddress LocalSubnet
+
+# Need to use Get-NetFirewallPortFilter to retrieve the port configurations of the rule
+Get-NetFirewallRule -DisplayName "SQLService" | Get-NetFirewallPortFilter
