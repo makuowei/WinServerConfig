@@ -1,7 +1,0 @@
-#Cet Request
-
-Certreq -new certreq.inf myservercert.req
-Certreq -submit myservercert.req	# The request prompt you for CA and save for the cert file
-Certreq -accept myservercert.cer
-
-
