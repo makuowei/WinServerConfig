@@ -1,0 +1,7 @@
+# Powershell to set System:EnvironmentVariable
+
+$newpath = "c:\your new path"
+
+$path = [Environment]::GetEnvironmentVariable('PSModulePath', 'Machine')
+$newpath = $path + $newpath
+[Environment]::SetEnvironmentVariable("PSModulePath", $newpath, 'Machine')

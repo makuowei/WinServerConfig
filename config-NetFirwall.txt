@@ -6,8 +6,11 @@ Get-NetFirewallProfile
 # Disable Firewall on all profiles
 #Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled false
 
+# Enable Ping
+Set-NetFirewallRule -Name FPS-ICMP4-ERQ-In -Enabled true
+
 # Instead of disabling firewall totally, Create Firewall Rules(SQL ports as example)
-New-NetFirewallRule -DisplayName SQLService `
+New-NetFirewallRule -Name SQLService -DisplayName SQLService `
   -Profile    Domain `
   -Direction  Inbound `
   -Action     Allow `
@@ -16,7 +19,7 @@ New-NetFirewallRule -DisplayName SQLService `
   -RemoteAddress LocalSubnet
 
 
-New-NetFirewallRule -DisplayName SQLBroker `
+New-NetFirewallRule -Name SQLBroker -DisplayName SQLBroker `
   -Profile    Domain `
   -Direction  Inbound `
   -Action     Allow `
