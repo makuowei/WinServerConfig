@@ -8,14 +8,14 @@ tzutil /s 'China Standard Time'
 # New-ItemProperty “HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\” -Name “DisabledComponents” -Value 0xffffffff -PropertyType “DWord"
 
 # 4. Set Network IP Address, NetworkMask, Default Gateway, DNS
-$IPAddress = Read-Host -Prompt "IP Address: "
+$IPAddress = Read-Host -Prompt 'IP Address: '
 Set-NetIPAddress –IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
 Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses 172.16.33.22,172.16.33.21
 
 # 5. Set Computer Name
-$NewComputerName = Read-Host -Prompt "Computer Name: "
+$NewComputerName = Read-Host -Prompt 'Computer Name: '
 Rename-Computer -NewName $NewComputerName
 
 # 6. Join Domain
-$Domain = Read-Host -Prompt "Domain: "
+$Domain = Read-Host -Prompt 'Domain: '
 Add-Computer -Domain $Domain
