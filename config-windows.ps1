@@ -2,7 +2,7 @@
 Set-ItemProperty 'HKLM:System\CurrentControlSet\Control\TerminalServer' -Name fDenyTSConnections -Value 0 
 
 # 2. Set Time Zone
-tzutil /s 'China Standard Time"
+tzutil /s 'China Standard Time'
 
 # 3. Disable IPv6
 # New-ItemProperty “HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\” -Name “DisabledComponents” -Value 0xffffffff -PropertyType “DWord"
