@@ -1,7 +1,18 @@
+﻿# -----------------------------------------------------------------------------------------------------------------------
+# Config Windows:
+#	1. Enable Remote Desktop
+#	2. Set Time Zone to GMT+8
+#	3. Disable IPv6 (optional)
+#	4. Set IP Address, NetworkMask, Default Gateway, DNS
+#	5. Set Computer Name
+#	6. Join Domain (Manual after reboot)
+#
+# Usage:
+#  iex ((New-Object System.Net.WebClient).DownloadString ('https://https://raw.githubusercontent.com/makuowei/WinServerConfig/master/config-win.txt')
   
 # 1. Enable Remote Desktop
-Set-ItemProperty 'HKLM:System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
-Set-NetFirewallRule -Name RemoteDesktop* -Enabled True
+Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
+Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'
 
 # 2. Set Time Zone
 tzutil /s 'China Standard Time'
