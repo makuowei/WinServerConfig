@@ -10,7 +10,7 @@ tzutil /s 'China Standard Time'
 # 4. Set Network IP Address, NetworkMask, Default Gateway, DNS
 $IPAddress = Read-Host -Prompt 'IP Address: '
 Set-NetIPAddress –IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
-Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses 172.16.33.22,172.16.33.21
+Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses 172.16.1.5
 
 # 5. Set Computer Name
 $NewComputerName = Read-Host -Prompt 'Computer Name: '
