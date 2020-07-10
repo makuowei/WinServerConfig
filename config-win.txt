@@ -1,6 +1,7 @@
   
 # 1. Enable Remote Desktop
-Set-ItemProperty 'HKLM:System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0 
+Set-ItemProperty 'HKLM:System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
+Set-NetFirewallRule -Name RemoteDesktop* -Enabled True
 
 # 2. Set Time Zone
 tzutil /s 'China Standard Time'
@@ -10,14 +11,18 @@ tzutil /s 'China Standard Time'
 
 # 4. Set Network IP Address, NetworkMask, Default Gateway, DNS
 $IPAddress = Read-Host -Prompt 'IP Address: '
+$DNSServer = Read-Host -Prompt 'DNS Server: '
+
 Remove-NetIPAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex
 New-NetIPAddress -IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
-Set-DNSClientServerAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex -ServerAddresses 172.16.1.5
+Set-DNSClientServerAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex -ServerAddresses $DNSServer
 
 # 5. Set Computer Name
 $NewComputerName = Read-Host -Prompt 'Computer Name: '
 Rename-Computer -NewName $NewComputerName
+$restart = Read-Host -Prompt 'Restart (Y/N)? '
+if ($restart -eq 'Y') { Restart-Computer }
 
 # 6. Join Domain
-$Domain = Read-Host -Prompt 'Domain: '
-Add-Computer -Domain $Domain
+#$Domain = Read-Host -Prompt 'Domain: '
+#Add-Computer -Domain $Domain
