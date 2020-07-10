@@ -5,7 +5,7 @@
 
 # Add ADCS Windows Feature
 Get-WindowsFeature ADCS*
-Add-WindowsFeature ADCS-Cert-Authority-IncludeManagementTools
+Add-WindowsFeature ADCS-Cert-Authority -IncludeManagementTools
 
 # Install ADCS CA (Choose one)
 
@@ -29,3 +29,7 @@ Install-AdcsCertificationAuthority -CAType EnterpriseRootCa `
 
 certutil -setreg policy\EditFlags +EDITF_ATTRIBUTESUBJECTALTNAME2
 Restart-Service Certsvc
+
+# Deploy Admin tools
+Add-WindowsFeature RSAT-ADCS
+

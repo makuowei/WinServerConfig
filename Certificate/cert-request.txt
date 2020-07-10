@@ -1,9 +1,10 @@
-# Cet Request
+ # Cet Request
 #     Usage: Edit certreq.inf for desire parameters, then run the following commands
 
 Certreq -new certreq.inf myservercert.req
 Certreq -submit myservercert.req	# The request prompt you for CA and save for the cert file
-Certreq -accept myservercert.cer
+					# cert -submit myreq.req myreq.cer myreq.pfx   -->
+Certreq -accept myservercert.cer	
 
 # Validate
 # Use Powershell 
