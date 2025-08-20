@@ -9,6 +9,10 @@
 #
 # Usage:
 #  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/makuowei/WinServerConfig/master/config-win.txt'))
+#  OR
+#  git clone https://github.com/makuowei/WinServerConfig.git
+#  cd WinServerConfig
+#  config-win.ps1
   
 # 1. Enable Remote Desktop
 Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
@@ -28,12 +32,19 @@ tzutil /s 'China Standard Time'
 # New-NetIPAddress -IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
 # Set-DNSClientServerAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex -ServerAddresses $DNSServer
 
-# 5. Set Computer Name
-$NewComputerName = Read-Host -Prompt 'Computer Name: '
-Rename-Computer -NewName $NewComputerName
-$restart = Read-Host -Prompt 'Restart (Y/N)? '
-if ($restart -eq 'Y') { Restart-Computer }
+# 5. Set Computer Name 
+# $NewComputerName = Read-Host -Prompt 'Computer Name: '
+# Rename-Computer -NewName $NewComputerName
+# $restart = Read-Host -Prompt 'Restart (Y/N)? '
+# if ($restart -eq 'Y') { Restart-Computer }
 
 # 6. Join Domain
-#$Domain = Read-Host -Prompt 'Domain: '
-#Add-Computer -Domain $Domain
+# $Domain = Read-Host -Prompt 'Domain: '
+# Add-Computer -DomainName $Domain
+
+
+# 5 & 6. Rename Computer and Join Domain
+$NewComputerName = Read-Host -Prompt 'Computer Name: '
+$Domain = Read-Host -Prompt 'Domain: '
+Add-Computer -DomainName $Domain -NewName $NewComputerName -Restart
+
