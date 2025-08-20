@@ -3,7 +3,7 @@
 #	1. Enable Remote Desktop
 #	2. Set Time Zone to GMT+8
 #	3. Disable IPv6 (optional)
-#	4. Set IP Address, NetworkMask, Default Gateway, DNS
+#	4. (skipped for AWS EC2) Set IP Address, NetworkMask, Default Gateway, DNS
 #	5. Set Computer Name
 #	6. Join Domain (Manual after reboot)
 #
@@ -21,12 +21,12 @@ tzutil /s 'China Standard Time'
 # New-ItemProperty “HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\” -Name “DisabledComponents” -Value 0xffffffff -PropertyType “DWord"
 
 # 4. Set Network IP Address, NetworkMask, Default Gateway, DNS
-$IPAddress = Read-Host -Prompt 'IP Address: '
-$DNSServer = Read-Host -Prompt 'DNS Server: '
+# $IPAddress = Read-Host -Prompt 'IP Address: '
+# $DNSServer = Read-Host -Prompt 'DNS Server: '
 
-Remove-NetIPAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex
-New-NetIPAddress -IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
-Set-DNSClientServerAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex -ServerAddresses $DNSServer
+# Remove-NetIPAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex
+# New-NetIPAddress -IPAddress $IPAddress -DefaultGateway 172.16.1.1 -PrefixLength 16 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
+# Set-DNSClientServerAddress -InterfaceIndex (Get-NetAdapter).InterfaceIndex -ServerAddresses $DNSServer
 
 # 5. Set Computer Name
 $NewComputerName = Read-Host -Prompt 'Computer Name: '
