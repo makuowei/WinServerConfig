@@ -9,7 +9,9 @@
 #
 # Usage:
 #  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/makuowei/WinServerConfig/master/config-win.txt'))
-#  OR
+#  
+#  OR if git has been installed...
+#
 #  git clone https://github.com/makuowei/WinServerConfig.git
 #  cd WinServerConfig
 #  config-win.ps1
