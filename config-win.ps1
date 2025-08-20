@@ -8,7 +8,7 @@
 #	6. Join Domain (Manual after reboot)
 #
 # Usage:
-#  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/makuowei/WinServerConfig/master/config-win.txt'))
+#  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/makuowei/WinServerConfig/master/config-win.ps1'))
 #  
 #  OR if git has been installed...
 #
