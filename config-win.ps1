@@ -21,7 +21,8 @@ Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 
 Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'
 
 # 2. Set Time Zone
-tzutil /s 'China Standard Time'
+# tzutil /s 'China Standard Time'
+Set-TimeZone -Id "China Standard Time"
 
 # 3. Disable IPv6
 # New-ItemProperty “HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\” -Name “DisabledComponents” -Value 0xffffffff -PropertyType “DWord"
